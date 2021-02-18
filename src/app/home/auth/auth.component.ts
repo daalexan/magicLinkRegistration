@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
 
 import { tap, filter, switchMap } from "rxjs/operators"
-import { partitionArray } from '@angular/compiler/src/util';
+
+import { ApiService } from 'src/app/services/api.service';
+
 import { User } from 'src/app/models/user.model';
+
 
 @Component({
   selector: 'app-auth',
@@ -40,8 +42,8 @@ export class AuthComponent implements OnInit {
 	public sendEmail() {
 		if (this.emailValue != "") {
 			this.apiService.sendUserMail(this.emailValue)
-				.subscribe((response: string) => {
-					this.message = response;
+				.subscribe((response: any) => {
+					this.message = response.user.email + "created";
 				});
 		} else {
 			this.message = "input field is empty"
